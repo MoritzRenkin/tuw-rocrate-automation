@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 
 prj_dir = os.path.dirname(__file__)
@@ -13,7 +14,9 @@ class ApiClient:
             self.__token: str = token_file.read()
             self.__token_suffix: str = f"?access_token={self.__token}"
 
+    def build_url(self, rel_path:str):
+        return self.base_url + rel_path.strip("/") + self.__token_suffix
     def get_all_records(self):
-        url = self.base_url + "records/" + self.__token_suffix
+        url = self.build_url("records/")
         r = requests.get(url)
-        return r
+        return json.loads(r.text)
