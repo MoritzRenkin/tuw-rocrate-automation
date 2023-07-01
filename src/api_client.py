@@ -31,5 +31,3 @@ class ApiClient:
         url = self.build_url("records/")
         r = requests.post(url, json=draft_json)
         return json.loads(r.text)
-
-
