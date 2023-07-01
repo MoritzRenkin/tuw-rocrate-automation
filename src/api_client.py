@@ -16,7 +16,20 @@ class ApiClient:
 
     def build_url(self, rel_path:str):
         return self.base_url + rel_path.strip("/") + self.__token_suffix
-    def get_all_records(self):
+
+    def get_all_records(self) -> dict:
         url = self.build_url("records/")
         r = requests.get(url)
         return json.loads(r.text)
+
+    def create_draft_record(self, draft_json: dict) -> dict:
+        """
+
+        :param draft_json:
+        :return:
+        """
+        url = self.build_url("records/")
+        r = requests.post(url, json=draft_json)
+        return json.loads(r.text)
+
+
