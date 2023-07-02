@@ -42,7 +42,7 @@ class ApiClient:
         TODO docu
         :param record_id: ID of the draft record
         :param file_paths:
-        :return:
+        :return: None
         """
 
         # Create files on server
@@ -66,7 +66,6 @@ class ApiClient:
             # Commit file upload
             commit_url = self._build_url(f"records/{record_id}/draft/files/{filename}/commit")
             commit_response = requests.post(commit_url)
-            pass
 
     def publish_draft(self, record_id: str):
         """
@@ -77,4 +76,3 @@ class ApiClient:
         logger.debug("Publishing draft record.")
         url = self._build_url(f"records/{record_id}/draft/actions/publish")
         response = requests.post(url)
-        print(response)
