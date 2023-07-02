@@ -1,12 +1,11 @@
 import requests
-import os
 import json
 import logging
 from pathlib import Path
 
 logger = logging.getLogger("ApiClient")
-prj_dir = os.path.dirname(__file__)
-token_file_path = os.path.join(prj_dir, "api-access-token.txt")
+prj_dir = Path(__file__).parent.resolve()
+token_file_path = prj_dir / "api-access-token.txt"
 
 class ApiClient:
     base_url = "https://test.researchdata.tuwien.ac.at/api/"
@@ -38,7 +37,7 @@ class ApiClient:
         record_id = json.loads(response.text)["id"]
         return record_id
 
-    def upload_draft_files(self, record_id: str, file_paths: list[str]):
+    def upload_draft_files(self, record_id: str, file_paths: list[Path]):
         """
         TODO docu
         :param record_id: ID of the draft record
@@ -49,22 +48,25 @@ class ApiClient:
         # Create files on server
         create_url = self._build_url(f"records/{record_id}/draft/files")
 
-        paths: list[Path] = [Path(path) for path in file_paths]
-        file_names: list[str] = [path.name for path in paths]
+        file_paths: list[Path] = [Path(path) for path in file_paths]
+        file_names: list[str] = [path.name for path in file_paths]
 
         create_body = [{"key": filename} for filename in file_names]
         create_response = requests.post(create_url, json=create_body)
 
-        # Upload binary data to files
-        for path in paths:
+
+        for path in file_paths:
+            # Upload binary data to files
             filename = path.name
             upload_url = self._build_url(f"records/{record_id}/draft/files/{filename}/content")
             upload_header = {"Content-Type": "application/octet-stream"}
             file_content = path.read_bytes()
             upload_response = requests.put(upload_url, headers=upload_header, data=file_content)
+
+            # Commit file upload
+            commit_url = self._build_url(f"records/{record_id}/draft/files/{filename}/commit")
+            commit_response = requests.post(commit_url)
             pass
-
-
 
     def publish_draft(self, record_id: str):
         """
