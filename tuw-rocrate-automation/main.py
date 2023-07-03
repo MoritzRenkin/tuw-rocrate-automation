@@ -1,4 +1,4 @@
-from api_client import ApiClient
+from api_client import InvenioRDMClient
 from pathlib import Path
 
 test_record = {
@@ -39,10 +39,10 @@ test_record = {
 file_path = Path(__file__).parent.resolve()
 
 def main():
-    client = ApiClient()
-    #records = client.get_all_records()
+    client = InvenioRDMClient()
+    records = client.get_all_records()
     record_id = client.create_draft(test_record)
-    client.upload_draft_files(record_id=record_id, file_paths=[file_path / "testfile.txt"])
+    client.upload_draft_files(record_id=record_id, file_paths=[file_path / "../test/testfile.txt"])
     client.publish_draft(record_id)
 
 if __name__ == '__main__':

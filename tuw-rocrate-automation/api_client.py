@@ -4,10 +4,16 @@ import logging
 from pathlib import Path
 
 logger = logging.getLogger("ApiClient")
-prj_dir = Path(__file__).parent.resolve()
-token_file_path = prj_dir / "api-access-token.txt"
+file_path = Path(__file__).parent.resolve()
+token_file_path = file_path / "api-access-token.txt"
 
-class ApiClient:
+
+class APIResponseException(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+
+class InvenioRDMClient:
     base_url = "https://test.researchdata.tuwien.ac.at/api/"
 
     def __init__(self):
@@ -21,23 +27,26 @@ class ApiClient:
     def get_all_records(self) -> dict:
         url = self._build_url("records/")
         r = requests.get(url)
+        if not r.ok:
+            raise APIResponseException(f"Unexpected Response code {r.status_code}, message body: {r.text}")
         return json.loads(r.text)
 
     def create_draft(self, draft_json: dict) -> str:
-        """
-        Create a draft record without publishing.
-
+        """ Create a draft record without publishing.
         :param draft_json: Message Body according to InvenioRDM documentation.
         :return: ID of the draft record
         """
         logger.debug("Creating draft record.")
         url = self._build_url("records/")
         response = requests.post(url, json=draft_json)
-        logger.debug(f"API Response body: {response.text}")
+        logger.debug(f"API Response to creating draft: {response.text}, draft_json:\n{draft_json}")
+        if not response.ok:
+            raise APIResponseException(f"Unexpected Response code {response.status_code}, "
+                                       f"message body: {response.text}")
         record_id = json.loads(response.text)["id"]
         return record_id
 
-    def upload_draft_files(self, record_id: str, file_paths: list[Path]):
+    def upload_draft_files(self, record_id: str, file_paths: list[Path] | list[str]):
         """
         TODO docu
         :param record_id: ID of the draft record
@@ -53,7 +62,10 @@ class ApiClient:
 
         create_body = [{"key": filename} for filename in file_names]
         create_response = requests.post(create_url, json=create_body)
-
+        logger.debug(f"API response to creating files: {create_response.text}")
+        if not create_response.ok:
+            raise APIResponseException(f"Unexpected Response code {create_response.status_code}, "
+                                       f"message body: {create_response.text}")
 
         for path in file_paths:
             # Upload binary data to files
@@ -62,17 +74,29 @@ class ApiClient:
             upload_header = {"Content-Type": "application/octet-stream"}
             file_content = path.read_bytes()
             upload_response = requests.put(upload_url, headers=upload_header, data=file_content)
+            logger.debug(f"API response to uploading file {path.resolve()}: {upload_response.text}")
+            if not upload_response.ok:
+                raise APIResponseException(f"Unexpected Response code {upload_response.status_code},"
+                                           f" message body: {upload_response.text}")
 
             # Commit file upload
             commit_url = self._build_url(f"records/{record_id}/draft/files/{filename}/commit")
             commit_response = requests.post(commit_url)
+            logger.debug(f"API response to committing file upload {path.resolve()}: {commit_response.text}")
+            if not commit_response.ok:
+                raise APIResponseException(f"Unexpected Response code {commit_response.status_code}, "
+                                           f"message body: {commit_response.text}")
 
     def publish_draft(self, record_id: str):
         """
         TODO docu
         :param record_id: ID of the draft record
-        :return:
+        :return: None
         """
         logger.debug("Publishing draft record.")
         url = self._build_url(f"records/{record_id}/draft/actions/publish")
         response = requests.post(url)
+        logger.debug(f"API response to publishing draft {record_id}: {response.text}")
+        if not response.ok:
+            raise APIResponseException(f"Unexpected Response code {response.status_code}, "
+                                       f"message body: {response.text}")
