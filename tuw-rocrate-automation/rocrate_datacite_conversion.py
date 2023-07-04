@@ -5,12 +5,13 @@ TEMPLATE_DATACITE_RECORD = {
     "access": {
         "record": "public",
         "files": "public"
-      },
+    },
     "files": {
         "enabled": True
-      },
+    },
     "metadata": {}
 }
+
 
 def generate_datacite_record(rocrate_path: str | Path) -> dict:
     """
@@ -25,6 +26,9 @@ def generate_datacite_record(rocrate_path: str | Path) -> dict:
     record_metadata = record['metadata']
     record_metadata['title'] = crate.name
     record_metadata['description'] = crate.description
+    record_metadata['publication_date'] = crate.datePublished.strftime('%Y-%m-%d')
+
+    record_metadata['subjects'] = list(map(lambda keyword: {"subject": keyword}, crate.keywords))
 
     creator_emails = {creator for e in crate.get_entities() if e.get("creator") for creator in e.get("creator")}
     # TODO
