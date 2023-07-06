@@ -70,14 +70,38 @@ class ROCrateDataCiteConverter:
         record_metadata['description'] = self.crate.description
         record_metadata['publication_date'] = self.crate.datePublished.strftime('%Y-%m-%d')
 
-        record_metadata['subjects'] = list(map(lambda keyword: {"subject": keyword}, self.crate.keywords))
+        # rocrate::keywords is a comma separated string of https://schema.org/keywords
+        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#subjects--keywords
+        # crate.keywords is already split into array and may contain uris
+        # datacite::subjects contains list of object each requiring a string in subject property
+        #   The optional subject.valueUri might be appropriate for uris, but without retrieving
+        #   additional resources, the subject would still have to match the uri.
+        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L292
+        record_metadata['subjects'] = [{'subject': keyword} for keyword in crate.keywords]
 
+        # rocrate name required https://www.researchobject.org/ro-crate/0.1.0/#file-attributions
+        # in practice it can be a string that might not even contain the name instead of an object
+        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L253
         # agents = [e for e in crate.contextual_entities if e.type == "agent"]
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
         record_metadata["creators"] = [c.to_dict() for c in creators]
         # TODO contributes (how to map roles?)
 
+        # only metadata license since files might have different license
+        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#metadata-license
+        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L401
+        # if crate.license and crate.license.get('@id'):
+        #     record.metadata['rights'] = [
+        #         {'rightsUri': crate.license.get('@id')}
+        #     ]
+    
+        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#time
+        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L325
+        # record_metadata['dates'] = [
+        #     {'date': e.get('temporalCoverage'), 'dateType': 'Other'}
+        #     for e in crate.get_entities() if e.get('temporalCoverage')
+        # ]
 
         self.crate_metadata_raw = None
         self.crate = None
