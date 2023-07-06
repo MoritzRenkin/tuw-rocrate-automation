@@ -86,7 +86,7 @@ class ROCrateDataCiteConverter:
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
         record_metadata["creators"] = [c.to_dict() for c in creators]
-        # TODO contributes (how to map roles?)
+        # TODO contributers (how to map roles?)
 
         # only metadata license since files might have different license
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#metadata-license

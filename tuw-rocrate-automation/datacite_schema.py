@@ -2,11 +2,9 @@ from dataclasses import dataclass, asdict
 from abc import ABC, abstractmethod
 
 
-
 class AbstractJsonSchema(ABC):
     def to_dict(self) -> dict:
         return {k: v for k, v in asdict(self).items() if v is not None}
-
 
 
 @dataclass
