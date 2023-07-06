@@ -1,6 +1,8 @@
 from rocrate.rocrate import ROCrate
 from pathlib import Path
 import json
+from datacite_schema import Identifier, Creator, Affiliation
+
 
 TEMPLATE_DATACITE_RECORD = {
     "access": {
@@ -13,36 +15,44 @@ TEMPLATE_DATACITE_RECORD = {
     "metadata": {}
 }
 
-class ROCrateDataCiteConverter:
 
+
+class ROCrateDataCiteConverter:
     def __init__(self):
         self.crate_metadata_raw: dict = {}
         self.crate: ROCrate | None = None
 
-    def _get_creator_names(self, creator_emails) -> list[str]:
+    def _get_creators(self, creator_emails) -> list[Creator]:
         """
-        Reads creator names from raw metadata file, due to lacking functionality in ROCrate package.
+        Reads creators from raw metadata json file, due to lacking functionality in ROCrate package.
         :param creator_emails: Emails of the agents.
-        :return:
+        :return: List of creators.
         """
-        creator_ids = set()
-        creator_names = []
+        creators_by_id = {}
         entities_raw = self.crate_metadata_raw["@graph"]
         agents = [e for e in entities_raw if e.get("@type") == "agent"]
 
         for agent in agents:
             if agent.get("email") in creator_emails:
-                creator_ids.add(agent.get("@id"))
+                agent_id = agent.get("@id")
+                identifiers = [Identifier(scheme="Unknown", identifier=agent_id)]
+                creators_by_id[agent_id] = Creator(identifiers=identifiers)
 
         for agent in agents:
-            agent_name = agent.get("@name")
-            if agent.get("@id") in creator_ids and agent_name is not None:
-                creator_names.append(agent_name)
+            # TODO personal vs organizational
+            agent_name = agent.get("name")
+            agent_id = agent.get("@id")
+            agent_affiliation = agent.get("affiliation")
+            if agent_id in creators_by_id:
+                creator = creators_by_id[agent_id]
+                if agent_name is not None:
+                    creator.given_name, creator.family_name = agent_name.rsplit(" ")
+                if agent_affiliation is not None:
+                    creator.affiliations = [Affiliation(id="0", name=agent_affiliation)]
+
+        return list(creators_by_id.values())
 
 
-
-
-        return creator_names
     def generate_datacite_record(self, rocrate_metadata_path: str | Path) -> dict:
         """
         TODO docu
@@ -63,10 +73,12 @@ class ROCrateDataCiteConverter:
 
         # agents = [e for e in crate.contextual_entities if e.type == "agent"]
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
-        creator_names = self._get_creator_names(creator_emails)
+        creators = self._get_creators(creator_emails)
         pass
         # TODO
 
+
+        self.
         self.crate_metadata_raw = None
         self.crate = None
         return record
