@@ -43,7 +43,7 @@ def main():
     records = client.get_all_records()
     record_id = client.create_draft(test_record)
     client.upload_draft_files(record_id=record_id, file_paths=[file_path / "../test/testfile.txt"])
-    client.publish_draft(record_id)
+    #client.publish_draft(record_id)
 
 if __name__ == '__main__':
     main()
