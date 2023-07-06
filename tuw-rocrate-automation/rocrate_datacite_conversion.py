@@ -1,7 +1,7 @@
 from rocrate.rocrate import ROCrate
 from pathlib import Path
 import json
-from datacite_schema import Identifier, Creator, Affiliation
+from datacite_schema import Identifier, Agent, Affiliation, PersonOrOrg
 
 
 TEMPLATE_DATACITE_RECORD = {
@@ -22,7 +22,7 @@ class ROCrateDataCiteConverter:
         self.crate_metadata_raw: dict = {}
         self.crate: ROCrate | None = None
 
-    def _get_creators(self, creator_emails) -> list[Creator]:
+    def _get_creators(self, creator_emails) -> list[Agent]:
         """
         Reads creators from raw metadata json file, due to lacking functionality in ROCrate package.
         :param creator_emails: Emails of the agents.
@@ -36,7 +36,8 @@ class ROCrateDataCiteConverter:
             if agent.get("email") in creator_emails:
                 agent_id = agent.get("@id")
                 identifiers = [Identifier(scheme="Unknown", identifier=agent_id)]
-                creators_by_id[agent_id] = Creator(identifiers=identifiers)
+                person_or_org = PersonOrOrg(identifiers=identifiers)
+                creators_by_id[agent_id] = Agent(person_or_org=person_or_org)
 
         for agent in agents:
             # TODO personal vs organizational
@@ -46,7 +47,7 @@ class ROCrateDataCiteConverter:
             if agent_id in creators_by_id:
                 creator = creators_by_id[agent_id]
                 if agent_name is not None:
-                    creator.given_name, creator.family_name = agent_name.rsplit(" ")
+                    creator.person_or_org.given_name, creator.person_or_org.family_name = agent_name.rsplit(" ")
                 if agent_affiliation is not None:
                     creator.affiliations = [Affiliation(id="0", name=agent_affiliation)]
 
@@ -64,7 +65,7 @@ class ROCrateDataCiteConverter:
         self.crate = ROCrate(rocrate_metadata_path.parent)
 
         record = TEMPLATE_DATACITE_RECORD.copy()
-        record_metadata = record['metadata']
+        record_metadata: dict[str, type | list] = record['metadata']
         record_metadata['title'] = self.crate.name
         record_metadata['description'] = self.crate.description
         record_metadata['publication_date'] = self.crate.datePublished.strftime('%Y-%m-%d')
@@ -74,11 +75,10 @@ class ROCrateDataCiteConverter:
         # agents = [e for e in crate.contextual_entities if e.type == "agent"]
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
-        pass
-        # TODO
+        record_metadata["creators"] = [c.to_dict() for c in creators]
+        # TODO contributes (how to map roles?)
 
 
-        self.
         self.crate_metadata_raw = None
         self.crate = None
         return record

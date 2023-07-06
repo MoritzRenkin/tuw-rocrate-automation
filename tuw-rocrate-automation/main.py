@@ -12,7 +12,7 @@ test_record = {
   "metadata": {
     "creators": [
       {
-        "person_or_org": {
+        "PersonOrOrg": {
           "family_name": "Renkin",
           "given_name": "Moritz",
           "identifiers": [
