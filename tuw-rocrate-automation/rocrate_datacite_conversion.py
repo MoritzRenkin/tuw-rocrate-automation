@@ -70,38 +70,35 @@ class ROCrateDataCiteConverter:
         record_metadata['description'] = self.crate.description
         record_metadata['publication_date'] = self.crate.datePublished.strftime('%Y-%m-%d')
 
-        # rocrate::keywords is a comma separated string of https://schema.org/keywords
+        # rocrate keywords is a comma separated string of https://schema.org/keywords
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#subjects--keywords
-        # crate.keywords is already split into array and may contain uris
-        # datacite::subjects contains list of object each requiring a string in subject property
-        #   The optional subject.valueUri might be appropriate for uris, but without retrieving
-        #   additional resources, the subject would still have to match the uri.
-        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L292
+        # crate.keywords is already split into array but may contain uris
         record_metadata['subjects'] = [{'subject': keyword} for keyword in self.crate.keywords]
 
-        # rocrate name required https://www.researchobject.org/ro-crate/0.1.0/#file-attributions
-        # in practice it can be a string that might not even contain the name instead of an object
-        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L253
+        # In practice creators are an array of email strings instead of the proper object.
+        # https://github.com/ResearchObject/ro-crate/blob/c4b4e3e0936c95406e4adc82bcb7b1025c05a786/docs/1.1/workflows.md?plain=1#L263
+        # https://inveniordm.docs.cern.ch/reference/metadata/#creators-1-n
         # agents = [e for e in crate.contextual_entities if e.type == "agent"]
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
         record_metadata["creators"] = [c.to_dict() for c in creators]
         # TODO contributers (how to map roles?)
 
-        # only metadata license since files might have different license
-        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#metadata-license
-        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L401
-        # if crate.license and crate.license.get('@id'):
-        #     record.metadata['rights'] = [
-        #         {'rightsUri': crate.license.get('@id')}
-        #     ]
+        # Technically a license should be an object with a link in the property @id
+        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#licensing-access-control-and-copyright
+        # In practice it is a string equivalent to the Identifier value
+        # https://inveniordm.docs.cern.ch/reference/metadata/#rights-licenses-0-n
+        # the documentation uses lower case
+        licenses: set[str] = {e.get('license') for e in self.crate.get_entities() if e.get('license')}
+        record_metadata['rights'] = [{'id': license.lower()} for license in licenses]
     
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#time
-        # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L325
-        # record_metadata['dates'] = [
-        #     {'date': e.get('temporalCoverage'), 'dateType': 'Other'}
-        #     for e in crate.get_entities() if e.get('temporalCoverage')
-        # ]
+        # https://inveniordm.docs.cern.ch/reference/metadata/#dates-0-n
+        # "Only id needs to be passed on the REST API."
+        record_metadata['dates'] = [
+            {'date': e.get('temporalCoverage'), 'type': {'id': 'other'}}
+            for e in self.crate.get_entities() if e.get('temporalCoverage')
+        ]
 
         self.crate_metadata_raw = None
         self.crate = None
