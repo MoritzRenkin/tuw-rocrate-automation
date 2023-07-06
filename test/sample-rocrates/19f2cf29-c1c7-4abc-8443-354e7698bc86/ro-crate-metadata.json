@@ -1,0 +1,697 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.1/context",
+    "https://w3id.org/ro/terms/earth-science#",
+    {
+      "description": "http://purl.org/dc/terms/description",
+      "title": "http://purl.org/dc/terms/title",
+      "creation_mode": "http://w3id.org/ro-id/rohub/model#creation_mode"
+    }
+  ],
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "./",
+      "identifier": "https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86",
+      "hasPart": [
+        {
+          "@id": "biblio%2F"
+        },
+        {
+          "@id": "data%2F"
+        },
+        {
+          "@id": "https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86/resources/053eea69-7fb7-4a53-a641-06bbb15a0961"
+        },
+        {
+          "@id": "https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86/resources/25cae486-8fcf-4d14-bba4-9dc1bf761318"
+        }
+      ],
+      "@type": [
+        "Dataset"
+      ],
+      "creator": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "author": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "studySubject": [
+        "http://eurovoc.europa.eu/3949"
+      ],
+      "citeAs": "Grande, Valentina. \"Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea.\" ROHub. Jul 04 ,2023. https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86.",
+      "datePublished": "2023-07-04 13:14:01.668370+00:00",
+      "dateCreated": "2023-07-04 13:14:01.668370+00:00",
+      "dateModified": "2023-07-05 07:41:03.911643+00:00",
+      "contributors": [],
+      "https://w3id.org/ro/terms/earth-science#template": "https://w3id.org/ro/terms/earth-science#BibliographyCentricResearchObjectTemplate",
+      "keywords": [
+        "spectral library",
+        "Adriatic Sea",
+        "cold-water coral",
+        " habitat mapping",
+        "coralligenous",
+        "hyperspectral camera"
+      ],
+      "description": "Scientific paper about the application of the hyperspectral camera ECOTONE for underwater benthic habitat mapping in the Southern Adriatic Sea\nCited as: \nFoglini, F.; Grande, V.; Marchese, F.; Bracchi, V.A.; Prampolini, M.; Angeletti, L.; Castellan, G.; Chimienti, G.; Hansen, I.M.; Gudmundsen, M.; et al. Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea. Sensors 2019, 19, 2261. https://doi.org/10.3390/s19102261",
+      "http://w3id.org/ro-id/rohub/model#creation_mode": "MANUAL",
+      "name": "Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea",
+      "https://w3id.org/contentdesc#Domain": "https://w3id.org/ro-id/694c0ed5-8807-473e-b338-4f91a7db84b5",
+      "https://w3id.org/contentdesc#Place": "https://w3id.org/ro-id/44137ee5-4e6c-4756-bac1-7d651dffbbd8",
+      "https://w3id.org/ro/terms/earth-science#Concept": [
+        "https://w3id.org/ro-id/a4d3077c-2122-43e5-971b-8de8a459faa4",
+        "https://w3id.org/ro-id/159fdfc5-121e-4d08-beef-a93a6cad9005",
+        "https://w3id.org/ro-id/342edaff-c743-4de4-a680-17b5d6c9f287",
+        "https://w3id.org/ro-id/476e2ba9-ef5e-4b7d-8d79-b7a54525c2c3"
+      ],
+      "https://w3id.org/ro/terms/earth-science#FieldOfResearch": [
+        "https://w3id.org/ro-id/e116f68f-b2e3-4d7c-bb7d-4b48b6c7daa7",
+        "https://w3id.org/ro-id/5af0358b-698f-4e80-927f-affc1273946e"
+      ],
+      "https://w3id.org/ro/terms/earth-science#IPTC": [
+        "https://w3id.org/ro-id/225b8f67-7e68-4d29-bd85-feb4dd998698",
+        "https://w3id.org/ro-id/79460ba8-04dc-4f8a-89f6-d5e22c873639"
+      ],
+      "https://w3id.org/ro/terms/earth-science#Lemma": [
+        "https://w3id.org/ro-id/197ff1d9-382a-4420-8137-692623fef20f",
+        "https://w3id.org/ro-id/0e6c8ea8-500d-443d-a3d3-8b2a504b2934",
+        "https://w3id.org/ro-id/2a0a95b2-cd83-4c4f-a605-9a299697bfa2",
+        "https://w3id.org/ro-id/31609b34-4394-492f-8ca1-56d976f001ae",
+        "https://w3id.org/ro-id/7b7e8f57-95a8-498f-8a79-a03f1944b051",
+        "https://w3id.org/ro-id/dc33676d-e25c-4ee6-82ee-5abd8c111f45",
+        "https://w3id.org/ro-id/e3c9cfd6-ed5b-4db3-b22c-152dcb4d15b1"
+      ],
+      "https://w3id.org/ro/terms/earth-science#NASA": [
+        "https://w3id.org/ro-id/560748da-6612-4f81-89a7-ca7386b4e908",
+        "https://w3id.org/ro-id/96106539-d6c7-4d45-9eef-aa094deb5375"
+      ],
+      "https://w3id.org/ro/terms/earth-science#Phrase": [
+        "https://w3id.org/ro-id/f8889950-6d40-44a1-ab10-37b692dbdd23",
+        "https://w3id.org/ro-id/25b883a9-776e-470e-9567-630f35bfbeb1",
+        "https://w3id.org/ro-id/1e3034e4-2128-4302-a84e-42d09c386dd5",
+        "https://w3id.org/ro-id/59ffd24f-eb71-4955-849b-d4c64d0df925",
+        "https://w3id.org/ro-id/6d889d2d-a9f1-4f40-91a8-3bdb448f4572"
+      ],
+      "https://w3id.org/ro/terms/earth-science#Sentence": [
+        "https://w3id.org/ro-id/e4b322f2-85cc-4b6d-a5b8-5b401b7e0229",
+        "https://w3id.org/ro-id/cbf5f2bc-6482-44de-a066-0327f206481f",
+        "https://w3id.org/ro-id/15b029c9-1a31-4c9d-b168-eafae06e163a"
+      ],
+      "contributor": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "modifiedTime": "2023-07-05 07:41:03.911643+00:00",
+      "location": {
+        "@type": "GeoShape",
+        "polygon": "16.59622192382813 40.53247515030883, 16.59622192382813 41.58863029496391, 18.580627441406254 41.58863029496391, 18.580627441406254 40.53247515030883, 16.59622192382813 40.53247515030883",
+        "identifier": "e11b4a88-f008-410b-a37e-e26d22c3e3cb"
+      }
+    },
+    {
+      "@id": "biblio%2F",
+      "@type": [
+        "Dataset",
+        "http://purl.org/wf4ever/wf4ever#Folder"
+      ],
+      "name": "biblio"
+    },
+    {
+      "@id": "data%2F",
+      "@type": [
+        "Dataset",
+        "http://purl.org/wf4ever/wf4ever#Folder"
+      ],
+      "name": "data"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86/resources/053eea69-7fb7-4a53-a641-06bbb15a0961",
+      "@type": [
+        "File"
+      ],
+      "name": "https://www.mdpi.com/sensors/sensors-19-02261/article_deploy/html/images/sensors-19-02261-g001.png",
+      "author": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "creator": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "sdDatePublished": "2023-07-04 13:17:41.984993+00:00",
+      "dateCreated": "2023-07-04 13:17:41.984993+00:00",
+      "dateModified": "2023-07-04 13:18:28.213724+00:00",
+      "contentUrl": "https://www.mdpi.com/sensors/sensors-19-02261/article_deploy/html/images/sensors-19-02261-g001.png",
+      "encodingFormat": "image/png",
+      "license": "CC-BY-4.0",
+      "description": "Figure 1. (A) Location of the two sites, inset shows the position in the Mediterranean Sea; (B) the extension of the Bari Canyon CWC province (from [56]) and (C) the extension of the coralligenous in the Brindisi area (black lines indicate the ROV surveys). Habitat maps produced by the BIOMAP project and further updated within the CoCoNet project. (D) Example of CWC habitat complexity showing colonies of M. oculata and large fan-shaped sponges (from [38]); (E) example of coralligenous characterized by CCA and Peyssonelliales, serpulids and orange encrusting sponges overprinting the calcified red algae."
+    },
+    {
+      "@id": "https://w3id.org/ro-id/19f2cf29-c1c7-4abc-8443-354e7698bc86/resources/25cae486-8fcf-4d14-bba4-9dc1bf761318",
+      "@type": [
+        "File"
+      ],
+      "name": "https://www.mdpi.com/1424-8220/19/10/2261",
+      "author": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "creator": [
+        "valentina.grande@bo.ismar.cnr.it"
+      ],
+      "sdDatePublished": "2023-07-04 13:25:06.720350+00:00",
+      "dateCreated": "2023-07-04 13:25:06.720350+00:00",
+      "dateModified": "2023-07-04 13:25:07.895737+00:00",
+      "contentUrl": "https://www.mdpi.com/1424-8220/19/10/2261",
+      "@reverse": {
+        "hasPart": [
+          {
+            "@id": "biblio%2F"
+          }
+        ]
+      },
+      "encodingFormat": null,
+      "license": "CC-BY-4.0",
+      "description": "Foglini, F.; Grande, V.; Marchese, F.; Bracchi, V.A.; Prampolini, M.; Angeletti, L.; Castellan, G.; Chimienti, G.; Hansen, I.M.; Gudmundsen, M.; et al. Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea. Sensors 2019, 19, 2261. https://doi.org/10.3390/s19102261"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/a4d3077c-2122-43e5-971b-8de8a459faa4",
+      "https://w3id.org/ro/terms/earth-science#normScore": "10.638297872340425",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/f8889950-6d40-44a1-ab10-37b692dbdd23",
+      "https://w3id.org/ro/terms/earth-science#normScore": "25.83682008368201",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/7b7e8f57-95a8-498f-8a79-a03f1944b051",
+      "https://w3id.org/ro/terms/earth-science#normScore": "12.410071942446043",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/25b883a9-776e-470e-9567-630f35bfbeb1",
+      "https://w3id.org/ro/terms/earth-science#normScore": "30.96234309623431",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/694c0ed5-8807-473e-b338-4f91a7db84b5",
+      "https://w3id.org/ro/terms/earth-science#normScore": "100.0",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/476e2ba9-ef5e-4b7d-8d79-b7a54525c2c3",
+      "https://w3id.org/ro/terms/earth-science#normScore": "13.98176291793313",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/dc33676d-e25c-4ee6-82ee-5abd8c111f45",
+      "https://w3id.org/ro/terms/earth-science#normScore": "27.87769784172662",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/5af0358b-698f-4e80-927f-affc1273946e",
+      "https://w3id.org/ro/terms/earth-science#normScore": "100.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/6d889d2d-a9f1-4f40-91a8-3bdb448f4572",
+      "https://w3id.org/ro/terms/earth-science#normScore": "18.723849372384937",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/2a0a95b2-cd83-4c4f-a605-9a299697bfa2",
+      "https://w3id.org/ro/terms/earth-science#normScore": "10.79136690647482",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/1e3034e4-2128-4302-a84e-42d09c386dd5",
+      "https://w3id.org/ro/terms/earth-science#normScore": "7.426778242677825",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/0e6c8ea8-500d-443d-a3d3-8b2a504b2934",
+      "https://w3id.org/ro/terms/earth-science#normScore": "10.971223021582734",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e116f68f-b2e3-4d7c-bb7d-4b48b6c7daa7",
+      "https://w3id.org/ro/terms/earth-science#normScore": "100.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/cbf5f2bc-6482-44de-a066-0327f206481f",
+      "https://w3id.org/ro/terms/earth-science#normScore": "50.15015015015015",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/59ffd24f-eb71-4955-849b-d4c64d0df925",
+      "https://w3id.org/ro/terms/earth-science#normScore": "17.05020920502092",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/15b029c9-1a31-4c9d-b168-eafae06e163a",
+      "https://w3id.org/ro/terms/earth-science#normScore": "27.827827827827825",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e4b322f2-85cc-4b6d-a5b8-5b401b7e0229",
+      "https://w3id.org/ro/terms/earth-science#normScore": "22.02202202202202",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/197ff1d9-382a-4420-8137-692623fef20f",
+      "https://w3id.org/ro/terms/earth-science#normScore": "12.050359712230216",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/31609b34-4394-492f-8ca1-56d976f001ae",
+      "https://w3id.org/ro/terms/earth-science#normScore": "10.79136690647482",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/96106539-d6c7-4d45-9eef-aa094deb5375",
+      "https://w3id.org/ro/terms/earth-science#normScore": "100.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/560748da-6612-4f81-89a7-ca7386b4e908",
+      "https://w3id.org/ro/terms/earth-science#normScore": "100.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/342edaff-c743-4de4-a680-17b5d6c9f287",
+      "https://w3id.org/ro/terms/earth-science#normScore": "48.32826747720365",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/159fdfc5-121e-4d08-beef-a93a6cad9005",
+      "https://w3id.org/ro/terms/earth-science#normScore": "27.0516717325228",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e3c9cfd6-ed5b-4db3-b22c-152dcb4d15b1",
+      "https://w3id.org/ro/terms/earth-science#normScore": "15.107913669064748",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/79460ba8-04dc-4f8a-89f6-d5e22c873639",
+      "https://w3id.org/ro/terms/earth-science#path": "Science and technology",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/225b8f67-7e68-4d29-bd85-feb4dd998698",
+      "https://w3id.org/ro/terms/earth-science#path": "Science and technology/Research/Scientific paper",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e4b322f2-85cc-4b6d-a5b8-5b401b7e0229",
+      "https://w3id.org/ro/terms/earth-science#score": "22.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/342edaff-c743-4de4-a680-17b5d6c9f287",
+      "https://w3id.org/ro/terms/earth-science#score": "15.9",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e116f68f-b2e3-4d7c-bb7d-4b48b6c7daa7",
+      "https://w3id.org/ro/terms/earth-science#score": "0.9244694709777832",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/560748da-6612-4f81-89a7-ca7386b4e908",
+      "https://w3id.org/ro/terms/earth-science#score": "0.5048508048057556",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/476e2ba9-ef5e-4b7d-8d79-b7a54525c2c3",
+      "https://w3id.org/ro/terms/earth-science#score": "4.6",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/dc33676d-e25c-4ee6-82ee-5abd8c111f45",
+      "https://w3id.org/ro/terms/earth-science#score": "15.5",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/5af0358b-698f-4e80-927f-affc1273946e",
+      "https://w3id.org/ro/terms/earth-science#score": "0.9244694709777832",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/2a0a95b2-cd83-4c4f-a605-9a299697bfa2",
+      "https://w3id.org/ro/terms/earth-science#score": "6.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/1e3034e4-2128-4302-a84e-42d09c386dd5",
+      "https://w3id.org/ro/terms/earth-science#score": "7.1",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e3c9cfd6-ed5b-4db3-b22c-152dcb4d15b1",
+      "https://w3id.org/ro/terms/earth-science#score": "8.4",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/f8889950-6d40-44a1-ab10-37b692dbdd23",
+      "https://w3id.org/ro/terms/earth-science#score": "24.7",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/694c0ed5-8807-473e-b338-4f91a7db84b5",
+      "https://w3id.org/ro/terms/earth-science#score": "2.6",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/7b7e8f57-95a8-498f-8a79-a03f1944b051",
+      "https://w3id.org/ro/terms/earth-science#score": "6.9",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/6d889d2d-a9f1-4f40-91a8-3bdb448f4572",
+      "https://w3id.org/ro/terms/earth-science#score": "17.9",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/0e6c8ea8-500d-443d-a3d3-8b2a504b2934",
+      "https://w3id.org/ro/terms/earth-science#score": "6.1",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/159fdfc5-121e-4d08-beef-a93a6cad9005",
+      "https://w3id.org/ro/terms/earth-science#score": "8.9",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/15b029c9-1a31-4c9d-b168-eafae06e163a",
+      "https://w3id.org/ro/terms/earth-science#score": "27.8",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/cbf5f2bc-6482-44de-a066-0327f206481f",
+      "https://w3id.org/ro/terms/earth-science#score": "50.1",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/96106539-d6c7-4d45-9eef-aa094deb5375",
+      "https://w3id.org/ro/terms/earth-science#score": "0.5048508048057556",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/197ff1d9-382a-4420-8137-692623fef20f",
+      "https://w3id.org/ro/terms/earth-science#score": "6.7",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/a4d3077c-2122-43e5-971b-8de8a459faa4",
+      "https://w3id.org/ro/terms/earth-science#score": "3.5",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/31609b34-4394-492f-8ca1-56d976f001ae",
+      "https://w3id.org/ro/terms/earth-science#score": "6.0",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/59ffd24f-eb71-4955-849b-d4c64d0df925",
+      "https://w3id.org/ro/terms/earth-science#score": "16.3",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/25b883a9-776e-470e-9567-630f35bfbeb1",
+      "https://w3id.org/ro/terms/earth-science#score": "29.6",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/44137ee5-4e6c-4756-bac1-7d651dffbbd8",
+      "https://w3id.org/ro/terms/earth-science#wikidata": "https://www.wikidata.org/wiki/Q13924",
+      "@type": "https://w3id.org/contentdesc#Place"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e4b322f2-85cc-4b6d-a5b8-5b401b7e0229",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/694c0ed5-8807-473e-b338-4f91a7db84b5",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/79460ba8-04dc-4f8a-89f6-d5e22c873639",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/225b8f67-7e68-4d29-bd85-feb4dd998698",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/5af0358b-698f-4e80-927f-affc1273946e",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e116f68f-b2e3-4d7c-bb7d-4b48b6c7daa7",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/560748da-6612-4f81-89a7-ca7386b4e908",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/96106539-d6c7-4d45-9eef-aa094deb5375",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/cbf5f2bc-6482-44de-a066-0327f206481f",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/15b029c9-1a31-4c9d-b168-eafae06e163a",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/dc33676d-e25c-4ee6-82ee-5abd8c111f45",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e3c9cfd6-ed5b-4db3-b22c-152dcb4d15b1",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/7b7e8f57-95a8-498f-8a79-a03f1944b051",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/197ff1d9-382a-4420-8137-692623fef20f",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/0e6c8ea8-500d-443d-a3d3-8b2a504b2934",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/31609b34-4394-492f-8ca1-56d976f001ae",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/2a0a95b2-cd83-4c4f-a605-9a299697bfa2",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/25b883a9-776e-470e-9567-630f35bfbeb1",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/f8889950-6d40-44a1-ab10-37b692dbdd23",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/6d889d2d-a9f1-4f40-91a8-3bdb448f4572",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/59ffd24f-eb71-4955-849b-d4c64d0df925",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/1e3034e4-2128-4302-a84e-42d09c386dd5",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/342edaff-c743-4de4-a680-17b5d6c9f287",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/159fdfc5-121e-4d08-beef-a93a6cad9005",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/476e2ba9-ef5e-4b7d-8d79-b7a54525c2c3",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/a4d3077c-2122-43e5-971b-8de8a459faa4",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/44137ee5-4e6c-4756-bac1-7d651dffbbd8",
+      "@type": "https://w3id.org/contentdesc#Place"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/197ff1d9-382a-4420-8137-692623fef20f",
+      "name": "hyperspectral imaging",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/7b7e8f57-95a8-498f-8a79-a03f1944b051",
+      "name": "F. Bracchi",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/79460ba8-04dc-4f8a-89f6-d5e22c873639",
+      "name": "Science and technology",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/1e3034e4-2128-4302-a84e-42d09c386dd5",
+      "name": "camera ecotone",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e3c9cfd6-ed5b-4db3-b22c-152dcb4d15b1",
+      "name": "habitat",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/dc33676d-e25c-4ee6-82ee-5abd8c111f45",
+      "name": "Adriatic Sea",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e4b322f2-85cc-4b6d-a5b8-5b401b7e0229",
+      "name": "Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea.",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/694c0ed5-8807-473e-b338-4f91a7db84b5",
+      "name": "hydrography",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/560748da-6612-4f81-89a7-ca7386b4e908",
+      "name": "geosciences",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/342edaff-c743-4de4-a680-17b5d6c9f287",
+      "name": "Adriatic Sea",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/159fdfc5-121e-4d08-beef-a93a6cad9005",
+      "name": "habitat",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/15b029c9-1a31-4c9d-b168-eafae06e163a",
+      "name": "Foglini, F.; Grande, V.; Marchese, F.; Bracchi, V.A.; Prampolini, M.; Angeletti, L.; Castellan, G.; Chimienti, G.; Hansen, I.M.; Gudmundsen, M.; et al. Application of Hyperspectral Imaging to Underwater Habitat Mapping, Southern Adriatic Sea.",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/cbf5f2bc-6482-44de-a066-0327f206481f",
+      "name": "Scientific paper about the application of the hyperspectral camera ECOTONE for underwater benthic habitat mapping in the Southern Adriatic Sea",
+      "@type": "https://w3id.org/ro/terms/earth-science#Sentence"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/96106539-d6c7-4d45-9eef-aa094deb5375",
+      "name": "geophysics",
+      "@type": "https://w3id.org/ro/terms/earth-science#NASA"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/2a0a95b2-cd83-4c4f-a605-9a299697bfa2",
+      "name": "M. Angeletti",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/476e2ba9-ef5e-4b7d-8d79-b7a54525c2c3",
+      "name": "ecotone",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/e116f68f-b2e3-4d7c-bb7d-4b48b6c7daa7",
+      "name": "oceanography",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/5af0358b-698f-4e80-927f-affc1273946e",
+      "name": "earth sciences",
+      "@type": "https://w3id.org/ro/terms/earth-science#FieldOfResearch"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/225b8f67-7e68-4d29-bd85-feb4dd998698",
+      "name": "Scientific paper",
+      "@type": "https://w3id.org/ro/terms/earth-science#IPTC"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/44137ee5-4e6c-4756-bac1-7d651dffbbd8",
+      "name": "Adriatic Sea",
+      "@type": "https://w3id.org/contentdesc#Place"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/6d889d2d-a9f1-4f40-91a8-3bdb448f4572",
+      "name": "application of hyperspectral imaging",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/f8889950-6d40-44a1-ab10-37b692dbdd23",
+      "name": "I.M. Gudmundsen",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/25b883a9-776e-470e-9567-630f35bfbeb1",
+      "name": "southern Adriatic Sea",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/31609b34-4394-492f-8ca1-56d976f001ae",
+      "name": "L. Castellan",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/a4d3077c-2122-43e5-971b-8de8a459faa4",
+      "name": "application",
+      "@type": "https://w3id.org/ro/terms/earth-science#Concept"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/59ffd24f-eb71-4955-849b-d4c64d0df925",
+      "name": "benthic habitat",
+      "@type": "https://w3id.org/ro/terms/earth-science#Phrase"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/0e6c8ea8-500d-443d-a3d3-8b2a504b2934",
+      "name": "Foglini",
+      "@type": "https://w3id.org/ro/terms/earth-science#Lemma"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/valentina.grande%40bo.ismar.cnr.it",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "name": "service-account-enrichment",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/valentina.grande%40bo.ismar.cnr.it",
+      "name": "Valentina Grande",
+      "@type": "agent"
+    }
+  ]
+}

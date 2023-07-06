@@ -77,7 +77,7 @@ class ROCrateDataCiteConverter:
         #   The optional subject.valueUri might be appropriate for uris, but without retrieving
         #   additional resources, the subject would still have to match the uri.
         # https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json#L292
-        record_metadata['subjects'] = [{'subject': keyword} for keyword in crate.keywords]
+        record_metadata['subjects'] = [{'subject': keyword} for keyword in self.crate.keywords]
 
         # rocrate name required https://www.researchobject.org/ro-crate/0.1.0/#file-attributions
         # in practice it can be a string that might not even contain the name instead of an object

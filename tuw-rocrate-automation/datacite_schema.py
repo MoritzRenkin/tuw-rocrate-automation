@@ -7,8 +7,6 @@ class AbstractJsonSchema(ABC):
     def to_dict(self) -> dict:
         return {k: v for k, v in asdict(self).items() if v is not None}
 
-    #def __str__(self):
-     #   self.to_dict()
 
 
 @dataclass
