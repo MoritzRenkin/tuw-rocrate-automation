@@ -2,6 +2,8 @@ from rocrate.rocrate import ROCrate
 from pathlib import Path
 import json
 from datacite_schema import Identifier, Agent, Affiliation, PersonOrOrg
+from idutils import detect_identifier_schemes, normalize_pid
+from urllib.parse import urlparse
 
 
 TEMPLATE_DATACITE_RECORD = {
@@ -84,6 +86,10 @@ class ROCrateDataCiteConverter:
         record_metadata["creators"] = [c.to_dict() for c in creators]
         # TODO contributers (how to map roles?)
 
+        # In practice contributors are urls instead of the proper object
+        # https://github.com/ResearchObject/ro-crate/blob/c4b4e3e0936c95406e4adc82bcb7b1025c05a786/docs/profiles.md?plain=1#L193
+        # e.get('contributors') is an array that is not mentioned in the documentation
+
         # Technically a license should be an object with a link in the property @id
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#licensing-access-control-and-copyright
         # In practice it is a string equivalent to the Identifier value
@@ -99,6 +105,45 @@ class ROCrateDataCiteConverter:
             {'date': e.get('temporalCoverage'), 'type': {'id': 'other'}}
             for e in self.crate.get_entities() if e.get('temporalCoverage')
         ]
+
+        def url2identifier(url: str) -> str:
+            scheme = detect_identifier_schemes(url)
+            if scheme:
+                scheme = scheme[0]
+                identifier = normalize_pid(url, scheme)
+            else:
+                scheme = 'other'
+                identifier = url
+            if scheme == 'url':
+                # unfortunately idutils (used by inveniordm) does not support w3id and geonames
+                parsed = urlparse(url)
+                if parsed.hostname.endswith('w3id.org'):
+                    scheme = 'w3id'
+                    identifier = parsed.path[1:]
+                if parsed.hostname.endswith('geonames.org'):
+                    scheme = 'geonames'
+                    identifier = parsed.path[1:]
+            return {'identifier': identifier, 'scheme': scheme}
+
+        # https://www.researchobject.org/ro-crate/1.1/metadata.html#recommended-identifiers
+        # https://inveniordm.docs.cern.ch/reference/metadata/#alternate-identifiers-0-n
+        record_metadata['identifiers'] = [
+            url2identifier(e.get('identifier'))
+            for e in self.crate.get_entities() if e.get('identifier') and e.get('@id') == './'
+        ]
+
+        # In practice related identifiers are frequently stored in @id and @type might be an
+        # identifier as well. Furthermore, inveniordm has no wildcard relation_type.
+        # The limited list of well documented types cannot be simply mapped to relation_type.
+        # https://github.com/inveniosoftware/invenio-rdm-records/blob/master/invenio_rdm_records/fixtures/data/vocabularies/relation_types.yaml
+        # The citation property could be added here as well
+        # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#publications-via-citation-property
+        # record_metadata['related_identifiers'] = [
+        #     dict(url2identifier(e.get('identifier')), **{'relation_type': {
+        #         id: 'ispartof' if e.get('@type') == 'Dataset' else 'cites'
+        #     }})
+        #     for e in self.crate.get_entities() if e.get('identifier') and e.get('@id') != './'
+        # ]
 
         self.crate_metadata_raw = None
         self.crate = None
