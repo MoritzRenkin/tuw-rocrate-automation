@@ -42,19 +42,17 @@ class ROCrateDataCiteConverter:
                 creators_by_id[agent_id] = Agent(person_or_org=person_or_org)
 
         for agent in agents:
-            # TODO personal vs organizational
             agent_name = agent.get("name")
             agent_id = agent.get("@id")
             agent_affiliation = agent.get("affiliation")
             if agent_id in creators_by_id:
                 creator = creators_by_id[agent_id]
                 if agent_name is not None:
-                    creator.person_or_org.given_name, creator.person_or_org.family_name = agent_name.rsplit(" ")
+                    creator.person_or_org.given_name, creator.person_or_org.family_name = agent_name.rsplit(" ") # TODO document name split
                 if agent_affiliation is not None:
                     creator.affiliations = [Affiliation(id="0", name=agent_affiliation)]
 
         return list(creators_by_id.values())
-
 
     def generate_datacite_record(self, rocrate_metadata_path: str | Path) -> dict:
         """
@@ -84,7 +82,7 @@ class ROCrateDataCiteConverter:
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
         record_metadata["creators"] = [c.to_dict() for c in creators]
-        # TODO contributers (how to map roles?)
+        # TODO contributors (how to map roles?)
 
         # In practice contributors are urls instead of the proper object
         # https://github.com/ResearchObject/ro-crate/blob/c4b4e3e0936c95406e4adc82bcb7b1025c05a786/docs/profiles.md?plain=1#L193
@@ -106,7 +104,7 @@ class ROCrateDataCiteConverter:
             for e in self.crate.get_entities() if e.get('temporalCoverage')
         ]
 
-        def url2identifier(url: str) -> str:
+        def __url2identifier(url: str) -> dict:
             scheme = detect_identifier_schemes(url)
             if scheme:
                 scheme = scheme[0]
@@ -128,7 +126,7 @@ class ROCrateDataCiteConverter:
         # https://www.researchobject.org/ro-crate/1.1/metadata.html#recommended-identifiers
         # https://inveniordm.docs.cern.ch/reference/metadata/#alternate-identifiers-0-n
         record_metadata['identifiers'] = [
-            url2identifier(e.get('identifier'))
+            __url2identifier(e.get('identifier'))
             for e in self.crate.get_entities() if e.get('identifier') and e.get('@id') == './'
         ]
 
@@ -149,6 +147,9 @@ class ROCrateDataCiteConverter:
         self.crate = None
         return record
 
+    def get_rocrate_file_paths(self, rocrate_metadata_path) -> list[Path]:
+        # TODO
+        pass
 
 if __name__ == '__main__':
     file_path = Path(__file__).parent.resolve()

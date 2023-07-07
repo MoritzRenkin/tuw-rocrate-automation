@@ -15,3 +15,8 @@ python -m pip install -r requirements.txt
 ```shell
 python tuw-rocrate-automation/main.py
 ```
+
+
+Fehlt:
+- Role?
+- Given vs. family name?
