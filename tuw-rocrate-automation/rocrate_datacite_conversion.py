@@ -148,8 +148,17 @@ class ROCrateDataCiteConverter:
         return record
 
     def get_rocrate_file_paths(self, rocrate_metadata_path) -> list[Path]:
-        # TODO
-        pass
+        rocrate_metadata_path = Path(rocrate_metadata_path)
+        with rocrate_metadata_path.open(mode="r") as file:
+            self.crate_metadata_raw = json.load(file)
+        self.crate = ROCrate(rocrate_metadata_path.parent)
+
+        # external links contain '//' and will not be uploaded
+        return [
+            e.get('name')
+            for e in self.crate.get_entities()
+            if e.get('@type') and 'File' in e.get('@type') and '//' not in e.get('name')
+        ]
 
 if __name__ == '__main__':
     file_path = Path(__file__).parent.resolve()
