@@ -74,13 +74,14 @@ class ROCrateDataCiteConverter:
 
         record_metadata: dict[str, type | list] = record['metadata']
         record_metadata['title'] = self.crate.name
-        record_metadata['description'] = self.crate.description
+        if self.crate.description is not None and self.crate.description != "nan":
+            record_metadata['description'] = self.crate.description
         record_metadata['publication_date'] = self.crate.datePublished.strftime('%Y-%m-%d')
 
         # rocrate keywords is a comma separated string of https://schema.org/keywords
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#subjects--keywords
         # crate.keywords is already split into array but may contain uris
-        if self.crate.keywords is not None:
+        if self.crate.keywords is not None and self.crate.keywords != "nan":
             record_metadata['subjects'] = [{'subject': keyword} for keyword in self.crate.keywords]
 
         # In practice creators are an array of email strings instead of the proper object.
