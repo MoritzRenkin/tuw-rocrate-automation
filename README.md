@@ -25,8 +25,6 @@ Due to the structure of rocrates not all relevant fields can be extracted. Some 
 
 Removed fields that are not part of the deposit page yet.
 
-This script converts ROcrate in the format of ROHub to DataCite InvenioRDM... TODO
-
 
 ## Setup
 
@@ -41,10 +39,10 @@ python -m pip install -r requirements.txt
 
 ## Execute
 ```shell
-python tuw-rocrate-automation/main.py
+python tuw_rocrate_upload.py
   [-token string]  # token for RDM
   [-rdm url]  # url to RDM
-  [-path string]  # path to individual rocrate or folder with multiple crates
+  [-path string]  # path to a directory containing a ro-crate-metadata.json file
 ```
 All values have fallback value in config or in case of path it is the folder of execution.
 
@@ -58,4 +56,5 @@ TODOs:
 - Readme.md
 - ~~File paths~~
 - Github Release
-- Add 
+- Add orcid in zenodo
+- TuWel
