@@ -31,7 +31,6 @@ Removed fields that are not part of the deposit page yet. Missing is documented 
 ### Setup
 
 - Create personal API token for the TU Wien Research Data API at https://test.researchdata.tuwien.ac.at/account/settings/applications/ (Test instance)
-
 - Install Python dependencies:
 ```sh
 python -m pip install -r requirements.txt
