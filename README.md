@@ -63,7 +63,7 @@ Some metadata fields that cannot be filled automatically, as denoted in section 
 
 
 For other fields, certain assumptions had to be made:
-- family_name, last_name: DataCite has separate attributes for the given and last name of a creator or other contribter whereas RO-Crate only has a name. In order to fill these two fields in the RDM API, we split the RO-Crate name attribute by spaces and use the last part as the family name with the rest serving as given name.
+- family_name, given_name: DataCite has separate attributes for the given and last name of a creator or other contributor whereas RO-Crate does not enforce separated family and given names. In order to fill these two fields in the RDM API, we split the RO-Crate name attribute by spaces and use the last part as the family name with the rest serving as given name.
 
 ### Test Upload
 
