@@ -54,4 +54,10 @@ options:
 
 Some arguments have fallback default values stored in `config.ini`.
 
+### Potential issues, Implementation challenges
+
+Due to the differing natures of the RO-Crate and DataCite standards, the resulting mapping allows only for a subset of the fields used by the TUW RDM Repository to be filled automatically.
+Some metadata fields that cannot be filled automatically with this script include
+
+
 [^1]: The script assumes the RO-Crate schema used by [RoHub](https://reliance.rohub.org/)
