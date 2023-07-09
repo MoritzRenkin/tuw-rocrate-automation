@@ -2,6 +2,8 @@
 
 Convert RO-Crate (Research Object Crate)[^1] InvenioRDM's bibliographic records and upload it to a RDM (Research Data Management) instance. RO-Crates may include additional files like images that will be uploaded as well.
 
+[![DOI](https://zenodo.org/badge/647654494.svg)](https://zenodo.org/badge/latestdoi/647654494)
+
 ## Supported metadata
 Due to the structure of RO-Crates not all relevant fields can be extracted. Some fields are provided via the config file instead. Other information is at least partially available but cannot be added due to missing fields that are mandatory in the RDM with no wildcard value. The following list includes all fields supported by the RDM. Strikethrough entries are not supported with a reason in parentheses. 
 
