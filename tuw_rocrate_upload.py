@@ -1,4 +1,4 @@
-from api_client import InvenioRDMClient
+from api_client import InvenioRDMClient, APIResponseException
 from pathlib import Path
 from rocrate_datacite_conversion import ROCrateDataCiteConverter
 from configparser import ConfigParser
@@ -29,8 +29,14 @@ def upload_crate(rocrate_path: Path, token: str|None, url: str|None, publish: bo
     record_id = client.create_draft(record_json)
     client.upload_draft_files(record_id=record_id, file_paths=upload_file_paths)
 
+    print(f"Draft Record with ID {record_id} was created. You can now edit and publish it in the \"My Dashboard\" section of the TUW Research Data Web portal.")
     if publish:
-        client.publish_draft(record_id)
+        try:
+            client.publish_draft(record_id)
+            print(f"Record with ID {record_id} was published.")
+        except APIResponseException as e:
+            print(f"Draft Record with ID {record_id} could not be published because some mandatory fields could not be filled using the provided RO-Crate.")
+
 
 
 if __name__ == '__main__':
