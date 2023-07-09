@@ -37,9 +37,5 @@ class PersonOrOrg(AbstractJsonSchema):
 class Agent(AbstractJsonSchema):
     person_or_org : PersonOrOrg
     affiliations: list[str] = None # if type is personal
-    role: str = "unknown" # TODO
+    role: str = "unknown"
 
-    def to_dict(self) -> dict:
-        if not all([self.affiliations]):
-            raise ValueError()
-        return super().to_dict()

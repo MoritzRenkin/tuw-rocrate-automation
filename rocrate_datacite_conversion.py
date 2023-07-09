@@ -80,7 +80,8 @@ class ROCrateDataCiteConverter:
         # rocrate keywords is a comma separated string of https://schema.org/keywords
         # https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#subjects--keywords
         # crate.keywords is already split into array but may contain uris
-        record_metadata['subjects'] = [{'subject': keyword} for keyword in self.crate.keywords]
+        if self.crate.keywords is not None:
+            record_metadata['subjects'] = [{'subject': keyword} for keyword in self.crate.keywords]
 
         # In practice creators are an array of email strings instead of the proper object.
         # https://github.com/ResearchObject/ro-crate/blob/c4b4e3e0936c95406e4adc82bcb7b1025c05a786/docs/1.1/workflows.md?plain=1#L263

@@ -1,0 +1,236 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.1/context",
+    "https://w3id.org/ro/terms/earth-science#",
+    {
+      "description": "http://purl.org/dc/terms/description",
+      "title": "http://purl.org/dc/terms/title",
+      "creation_mode": "http://w3id.org/ro-id/rohub/model#creation_mode"
+    }
+  ],
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "./",
+      "identifier": "https://w3id.org/ro-id/92f6334f-26fc-4181-bc0c-ef2725ba3ebc",
+      "hasPart": [
+        {
+          "@id": "https://w3id.org/ro-id/92f6334f-26fc-4181-bc0c-ef2725ba3ebc/resources/51ed4ce5-1bb0-43bb-bf96-a924faf972ce"
+        }
+      ],
+      "@type": [
+        "Dataset"
+      ],
+      "creator": [
+        "federica.foglini@ismar.cnr.it"
+      ],
+      "author": [
+        "federica.foglini@ismar.cnr.it"
+      ],
+      "studySubject": [
+        "http://w3id.org/ro-id/rohub/model#subject/146346",
+        "http://w3id.org/ro-id/rohub/model#subject/-611198087",
+        "http://w3id.org/ro-id/rohub/model#subject/-900704710",
+        "http://w3id.org/ro-id/rohub/model#subject/867915560",
+        "http://eurovoc.europa.eu/3291",
+        "http://w3id.org/ro-id/rohub/model#subject/-1029851247",
+        "http://w3id.org/ro-id/rohub/model#subject/-1445077896",
+        "http://w3id.org/ro-id/rohub/model#subject/225863545",
+        "http://w3id.org/ro-id/rohub/model#subject/100000839",
+        "http://w3id.org/ro-id/rohub/model#subject/100689981",
+        "http://w3id.org/ro-id/rohub/model#subject/-247820428",
+        "http://w3id.org/ro-id/rohub/model#subject/-2051423046",
+        "http://w3id.org/ro-id/rohub/model#subject/105133714",
+        "http://w3id.org/ro-id/rohub/model#subject/100179479"
+      ],
+      "citeAs": "Foglini, Federica. \"Noise Mapping Special Issue: The noise climate at the time of SARS-CoV-2 Virus/COVID-19 Disease.\" ROHub. Dec 10 ,2021. https://w3id.org/ro-id/92f6334f-26fc-4181-bc0c-ef2725ba3ebc.",
+      "datePublished": "2021-12-10 09:56:44.923361+00:00",
+      "dateCreated": "2021-12-10 09:56:44.923361+00:00",
+      "dateModified": "2023-07-08 13:40:43.284148+00:00",
+      "contributors": [],
+      "name": "Noise Mapping Special Issue: The noise climate at the time of SARS-CoV-2 Virus/COVID-19 Disease",
+      "description": "nan",
+      "http://w3id.org/ro-id/rohub/model#creation_mode": "MANUAL",
+      "contributor": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "modifiedTime": "2023-07-08 13:40:43.284148+00:00"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/92f6334f-26fc-4181-bc0c-ef2725ba3ebc/resources/51ed4ce5-1bb0-43bb-bf96-a924faf972ce",
+      "@type": [
+        "File"
+      ],
+      "name": "cite.txt",
+      "author": [
+        "service-account-generation-service"
+      ],
+      "creator": [
+        "service-account-generation-service"
+      ],
+      "sdDatePublished": "2021-12-10 09:56:48.725077+00:00",
+      "dateCreated": "2021-12-10 09:56:48.725077+00:00",
+      "dateModified": "2021-12-10 09:56:48.726109+00:00",
+      "contentUrl": "https://api.rohub.org/api/resources/51ed4ce5-1bb0-43bb-bf96-a924faf972ce/download/",
+      "contentSize": 178,
+      "encodingFormat": "text/plain",
+      "description": "nan"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/federica.foglini%40ismar.cnr.it",
+      "email": "federica.foglini@ismar.cnr.it",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/federica.foglini%40ismar.cnr.it",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/federica.foglini%40ismar.cnr.it",
+      "name": "Federica Foglini",
+      "@type": "agent"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-1445077896",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/867915560",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-1029851247",
+      "@type": "https://w3id.org/contentdesc#Place"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-247820428",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100689981",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-900704710",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100179479",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/146346",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/105133714",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/225863545",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-611198087",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-2051423046",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100000839",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/867915560",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "special issue",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/105133714",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "climate",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-2051423046",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "disease nan",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-900704710",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "medicine",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-611198087",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "microbiology",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/225863545",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "noise climate",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100689981",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "naan",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/146346",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "disease",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100179479",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "noise",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-247820428",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "map special issue",
+      "@type": "https://w3id.org/contentdesc#Expression"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/100000839",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "virus",
+      "@type": "https://w3id.org/contentdesc#Concept"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-1029851247",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "Asdrubali",
+      "@type": "https://w3id.org/contentdesc#Place"
+    },
+    {
+      "@id": "http://w3id.org/ro-id/rohub/model#subject/-1445077896",
+      "http://www.w3.org/2004/02/skos/core#prefLabel": "meteorology",
+      "@type": "https://w3id.org/contentdesc#Domain"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-generation-service",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-generation-service",
+      "name": "service-account-generation-service",
+      "@type": "agent"
+    },
+    {
+      "@id": "https://w3id.org/ro-id/users/service-account-enrichment",
+      "name": "service-account-enrichment",
+      "@type": "agent"
+    }
+  ]
+}
