@@ -1,11 +1,11 @@
 # tuw-rocrate-automation
 
-Convert RO-Crate (Research Object Crate)[^1] InvenioRDM's bibliographic records and upload it to a RDM (Research Data Management) instance.
+Convert RO-Crate (Research Object Crate)[^1] InvenioRDM's bibliographic records and upload it to a RDM (Research Data Management) instance. RO-Crates may include additional files like images that will be uploaded as well.
 
-### Supported metadata
-Due to the structure of rocrates not all relevant fields can be extracted. Some fields are provided via config. Other information is not partly extracted because one required field has no wildcard value. Reasons and links to related documentation is provided in the corresponding place in the code.
+## Supported metadata
+Due to the structure of RO-Crates not all relevant fields can be extracted. Some fields are provided via the config file instead. Other information is at least partially available but cannot be added due to missing fields that are mandatory in the RDM with no wildcard value. The following list includes all fields supported by the RDM. Strikethrough entries are not supported with a reason in parentheses. 
 
-* ~~resource_type~~ (via config)
+* ~~resource_type~~ (via config; multiple formats not supported)
 * creators
 * title
 * publication_date
@@ -13,17 +13,17 @@ Due to the structure of rocrates not all relevant fields can be extracted. Some 
 * description
 * ~~additional_descriptions~~
 * rights
-* ~~contributors~~
+* ~~contributors~~ (role not included)
 * subjects
-* ~~languages~~
+* ~~languages~~ (unsupported)
 * dates
-* ~~version~~
-* ~~publisher~~ (via config)
+* ~~version~~ (not included)
+* ~~publisher~~ (via config; missing)[^2]
 * identifiers
-* ~~related_identifiers~~
-* ~~funding~~
+* ~~related_identifiers~~ (relation_types not included)
+* ~~funding~~ (missing)[^3]
 
-Removed fields that are not part of the deposit page yet.
+Removed fields that are not part of the deposit page yet. Missing is documented as SHOULD ([RFC 2119](https://tools.ietf.org/html/rfc2119)) but practicly not in use. Reasons and links to related documentation is provided in the corresponding place in the code.
 
 
 ### Setup
@@ -75,3 +75,5 @@ The published record is immediately visible in the research data portal, includi
 
 
 [^1]: The script assumes the RO-Crate schema used by [RoHub](https://reliance.rohub.org/)
+[^2]: https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#publisher
+[^3]: https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#funding-and-grants
