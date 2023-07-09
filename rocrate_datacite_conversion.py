@@ -18,7 +18,7 @@ class ROCrateDataCiteConverter:
             self.crate_metadata_raw = json.load(file)
         self.crate = ROCrate(rocrate_metadata_path.parent)
 
-        self.file_paths = self._get_rocrate_file_paths()
+        self.upload_filenames = tuple(self._get_rocrate_filenames())
 
         self.TEMPLATE_DATACITE_RECORD = {
             "access": access_defaults,
@@ -66,7 +66,7 @@ class ROCrateDataCiteConverter:
         """
         record = self.TEMPLATE_DATACITE_RECORD.copy()
 
-        record['files'] = {"enabled": (len(self.file_paths) != 0)}
+        record['files'] = {"enabled": (len(self.upload_filenames) != 0)}
 
         record_metadata: dict[str, type | list] = record['metadata']
         record_metadata['title'] = self.crate.name
@@ -130,10 +130,10 @@ class ROCrateDataCiteConverter:
         self.crate = None
         return record
 
-    def _get_rocrate_file_paths(self) -> list[Path]:
+    def _get_rocrate_filenames(self) -> list[str]:
         # external links contain '//' and will not be uploaded
         return [
-            file_path / e.get('name')
+            e.get('name')
             for e in self.crate.get_entities()
             if e.get('@type') and 'File' in e.get('@type') and '//' not in e.get('name')
         ]
@@ -172,8 +172,3 @@ class ROCrateDataCiteConverter:
                 scheme = 'geonames'
                 identifier = parsed.path[1:]
         return Identifier(identifier=identifier, scheme=scheme)
-
-if __name__ == '__main__':
-
-    rocrate_path = file_path / '../test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800/ro-crate-metadata.json'
-    ROCrateDataCiteConverter(rocrate_path).generate_datacite_record()

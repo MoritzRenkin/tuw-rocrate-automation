@@ -7,6 +7,7 @@ from pathlib import Path
 logger = logging.getLogger("ApiClient")
 file_path = Path(__file__).parent.resolve()
 
+
 class APIResponseException(Exception):
     pass
 
@@ -14,7 +15,6 @@ class APIResponseException(Exception):
 class InvenioRDMClient:
     def __init__(self, base_url: str, token: str):
         self.base_url = base_url
-
         self.__token: str = token
         self.__token_suffix: str = f"?access_token={self.__token}"
 
@@ -43,7 +43,7 @@ class InvenioRDMClient:
         record_id = json.loads(response.text)["id"]
         return record_id
 
-    def upload_draft_files(self, record_id: str, file_paths: list[Path] | list[str]):
+    def upload_draft_files(self, record_id: str, file_paths: list[Path|str]):
         """
         TODO docu
         :param record_id: ID of the draft record

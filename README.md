@@ -53,9 +53,9 @@ All values have fallback value in config or in case of path it is the folder of 
 
 TODOs:
 - ~~remove identifier for Creator if unsupported scheme~~
-- config.ini inkl token
+- ~~config.ini inkl token~~
 - CL Parameter
 - Readme.md
-- File paths
+- ~~File paths~~
 - Github Release
 - Add 
