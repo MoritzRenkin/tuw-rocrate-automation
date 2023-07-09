@@ -1,6 +1,6 @@
 # tuw-rocrate-automation
 
-Convert RO-Crate (Research Object Crate) from RoHub to InvenioRDM's bibliographic records and upload it to a RDM (Research Data Management) instance.
+Convert RO-Crate (Research Object Crate)[^1] InvenioRDM's bibliographic records and upload it to a RDM (Research Data Management) instance.
 
 ## Supported metadata
 Due to the structure of rocrates not all relevant fields can be extracted. Some fields are provided via config. Other information is not partly extracted because one required field has no wildcard value. Reasons and links to related documentation is provided in the corresponding place in the code.
@@ -26,35 +26,32 @@ Due to the structure of rocrates not all relevant fields can be extracted. Some 
 Removed fields that are not part of the deposit page yet.
 
 
-## Setup
+### Setup
 
-- Create personal API token for the TU Wien Research Data API at https://test.researchdata.tuwien.ac.at/account/settings/applications/
-
-- Paste the created token into tuw-rocrate-automation/api-access-token.txt
+- Create personal API token for the TU Wien Research Data API at https://test.researchdata.tuwien.ac.at/account/settings/applications/ (Test instance)
 
 - Install Python dependencies:
-```shell
+```sh
 python -m pip install -r requirements.txt
 ```
 
-## Execute
-```shell
-python tuw_rocrate_upload.py
-  [-token string]  # token for RDM
-  [-rdm url]  # url to RDM
-  [-path string]  # path to a directory containing a ro-crate-metadata.json file
-```
-All values have fallback value in config or in case of path it is the folder of execution.
+### Basic Usage
+```sh
+python tuw_rocrate_upload.py -h
+usage: TUW RDM RO-Crate Upload [-h] [-u URL] [-t TOKEN] [-p] path                                                                                     
+                                                                                                                                                      
+Deposit your RO-Crate metadata and referenced files into the TU Wien Research Data Repository.                                                                                  
+                                                                                                                                                      
+positional arguments:                                                                                                                                 
+  path                  Relative or absolute path to directory containing ro-crate.metadata.json file. Referenced files must be in the same directory.
+                                                                                                                                                      
+options:                                                                                                                                              
+  -h, --help              show this help message and exit                                                                                               
+  -u URL, --url URL       URL to the RDM API                                                                                                            
+  -t TOKEN, --token       Bearer token for API authentication                                                                                           
+  -p, --publish           Publish the drafted record on the RDM Repository
+  ```
 
+Some arguments have fallback default values stored in `config.ini`.
 
-## 
-
-TODOs:
-- ~~remove identifier for Creator if unsupported scheme~~
-- ~~config.ini inkl token~~
-- CL Parameter
-- Readme.md
-- ~~File paths~~
-- Github Release
-- Add orcid in zenodo
-- TuWel
+[^1]: The script assumes the RO-Crate schema used by [RoHub](https://reliance.rohub.org/)

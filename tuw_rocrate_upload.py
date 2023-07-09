@@ -11,11 +11,14 @@ config.read(file_path / "config.ini")
 config = {s: dict(config.items(s)) for s in config.sections()}
 
 
-def upload_crate(rocrate_path: Path, token: str|None, url: str|None):
+def upload_crate(rocrate_path: Path, token: str|None, url: str|None, publish: bool=False):
     if not token:
         token = config["api"]["bearer_token"]
+        assert token != "", "You have not provided a bearer token for the API authentication."
     if not url:
         url = config["api"]["base_url"]
+        assert url != "", "You have not provided a URL to the RDM API."
+
     rocrate_metadata_path = rocrate_path / "ro-crate-metadata.json"
     client = InvenioRDMClient(base_url=url, token=token)
     converter = ROCrateDataCiteConverter(rocrate_metadata_path,
@@ -26,15 +29,19 @@ def upload_crate(rocrate_path: Path, token: str|None, url: str|None):
     record_id = client.create_draft(record_json)
     client.upload_draft_files(record_id=record_id, file_paths=upload_file_paths)
 
+    if publish:
+        client.publish_draft(record_id)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog="TUW RDM RO-Crate Upload",
         description="Deposit your rocrate data into the TU Wien Research Data Repository.")
-    parser.add_argument("RO-Crate Path", type=Path, help="Relative or absolute path to directory containing ro-crate.metadata.json file. Referenced files must be in the same directory.")
+    parser.add_argument("path", type=Path, help="Relative or absolute path to directory containing ro-crate.metadata.json file. Referenced files must be in the same directory.")
     parser.add_argument("-u", "--url", type=str, help="URL to the RDM API")
     parser.add_argument("-t", "--token", type=str, help="Bearer token for API authentication")
+    parser.add_argument("-p", "--publish", action="store_true", help="Publish the drafted record on the RDM Repository")
     args = parser.parse_args()
 
 
-    upload_crate()
+    upload_crate(rocrate_path=args.path, url=args.url, token=args.token, publish=args.publish)
