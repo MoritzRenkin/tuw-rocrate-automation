@@ -12,9 +12,12 @@ TEMPLATE_DATACITE_RECORD = {
         "files": "public"
     },
     "files": {
-        "enabled": True
+        "enabled": True # TODO
     },
-    "metadata": {}
+    "metadata": {
+        "resource_type": {"id": "text"}, # TODO read from config
+        "publisher": "TEST" # TODO read from config
+    }
 }
 
 
@@ -57,7 +60,7 @@ class ROCrateDataCiteConverter:
             if agent.get("email") in creator_emails:
                 agent_url = agent.get("@id") # @id field contains URL in crates from ROHub
                 identifiers = [_url2identifier(agent_url)]
-                person_or_org = PersonOrOrg(identifiers=identifiers)
+                person_or_org = PersonOrOrg(identifiers=None)
                 creators_by_id[agent_url] = Agent(person_or_org=person_or_org)
 
         for agent in agents:

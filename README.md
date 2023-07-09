@@ -25,6 +25,9 @@ Due to the structure of rocrates not all relevant fields can be extracted. Some 
 
 Removed fields that are not part of the deposit page yet.
 
+This script converts ROcrate in the format of ROHub to DataCite InvenioRDM... TODO
+
+
 ## Setup
 
 - Create personal API token for the TU Wien Research Data API at https://test.researchdata.tuwien.ac.at/account/settings/applications/
@@ -46,6 +49,13 @@ python tuw-rocrate-automation/main.py
 All values have fallback value in config or in case of path it is the folder of execution.
 
 
-Fehlt:
-- Role?
-- Given vs. family name?
+## 
+
+TODOs:
+- remove identifier for Creator if unsupported scheme
+- config.ini inkl token
+- CL Parameter
+- Readme.md
+- File paths
+- Github Release
+- Add 
