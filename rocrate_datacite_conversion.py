@@ -46,6 +46,10 @@ class ROCrateDataCiteConverter:
                 person_or_org = PersonOrOrg(identifiers=identifiers)
                 creators_by_id[agent_url] = Agent(person_or_org=person_or_org)
 
+        #if len(creators_by_id) == 0:
+         #   creator_email = next(iter(creator_emails))
+          #  creators_by_id[creator_email] = Agent(person_or_org=PersonOrOrg(identifiers=[self._url2creator_identifier(creator_email)]))
+
         for agent in agents:
             agent_name = agent.get("name")
             agent_url = agent.get("@id")
