@@ -1,5 +1,7 @@
 from api_client import InvenioRDMClient
 from pathlib import Path
+from rocrate_datacite_conversion import ROCrateDataCiteConverter
+
 
 test_record = {
   "access": {
@@ -39,11 +41,14 @@ test_record = {
 file_path = Path(__file__).parent.resolve()
 
 def main():
+    upload_dir = file_path / "../test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800/"
     client = InvenioRDMClient()
-    records = client.get_all_records()
-    record_id = client.create_draft(test_record)
-    client.upload_draft_files(record_id=record_id, file_paths=[file_path / "../test/testfile.txt"])
-    #client.publish_draft(record_id)
+    converter = ROCrateDataCiteConverter()
+    #records = client.get_all_records()
+    record_json = converter.generate_datacite_record(rocrate_metadata_path=upload_dir / "ro-crate-metadata.json")
+    record_id = client.create_draft(record_json)
+    client.upload_draft_files(record_id=record_id, file_paths=[upload_dir / "sketch.JPG"])
+    client.publish_draft(record_id)
 
 if __name__ == '__main__':
     main()

@@ -15,8 +15,8 @@ class Identifier(AbstractJsonSchema):
 
 @dataclass
 class Affiliation(AbstractJsonSchema):
-    id: str
     name: str
+    id: str = None
 
 
 @dataclass

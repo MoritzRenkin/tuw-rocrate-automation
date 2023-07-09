@@ -18,6 +18,25 @@ TEMPLATE_DATACITE_RECORD = {
 }
 
 
+def _url2identifier(url: str) -> Identifier:
+    scheme = detect_identifier_schemes(url)
+    if scheme:
+        scheme = scheme[0]
+        identifier = normalize_pid(url, scheme)
+    else:
+        scheme = 'other'
+        identifier = url
+    if scheme == 'url':
+        # unfortunately idutils (used by inveniordm) does not support w3id and geonames
+        parsed = urlparse(url)
+        if parsed.hostname.endswith('w3id.org'):
+            scheme = 'w3id'
+            identifier = parsed.path[1:]
+        if parsed.hostname.endswith('geonames.org'):
+            scheme = 'geonames'
+            identifier = parsed.path[1:]
+    return Identifier(identifier=identifier, scheme=scheme)
+
 
 class ROCrateDataCiteConverter:
     def __init__(self):
@@ -27,7 +46,7 @@ class ROCrateDataCiteConverter:
     def _get_creators(self, creator_emails) -> list[Agent]:
         """
         Reads creators from raw metadata json file, due to lacking functionality in ROCrate package.
-        :param creator_emails: Emails of the agents.
+        :param creator_emails: Emails of the agents as iterable.
         :return: List of creators.
         """
         creators_by_id = {}
@@ -36,21 +55,21 @@ class ROCrateDataCiteConverter:
 
         for agent in agents:
             if agent.get("email") in creator_emails:
-                agent_id = agent.get("@id")
-                identifiers = [Identifier(scheme="Unknown", identifier=agent_id)]
+                agent_url = agent.get("@id") # @id field contains URL in crates from ROHub
+                identifiers = [_url2identifier(agent_url)]
                 person_or_org = PersonOrOrg(identifiers=identifiers)
-                creators_by_id[agent_id] = Agent(person_or_org=person_or_org)
+                creators_by_id[agent_url] = Agent(person_or_org=person_or_org)
 
         for agent in agents:
             agent_name = agent.get("name")
-            agent_id = agent.get("@id")
+            agent_url = agent.get("@id")
             agent_affiliation = agent.get("affiliation")
-            if agent_id in creators_by_id:
-                creator = creators_by_id[agent_id]
+            if agent_url in creators_by_id:
+                creator = creators_by_id[agent_url]
                 if agent_name is not None:
                     creator.person_or_org.given_name, creator.person_or_org.family_name = agent_name.rsplit(" ") # TODO document name split
                 if agent_affiliation is not None:
-                    creator.affiliations = [Affiliation(id="0", name=agent_affiliation)]
+                    creator.affiliations = [Affiliation(name=agent_affiliation)]
 
         return list(creators_by_id.values())
 
@@ -82,7 +101,6 @@ class ROCrateDataCiteConverter:
         creator_emails: set[str] = {creator for e in self.crate.get_entities() if e.get("creator") for creator in e.get("creator")}
         creators = self._get_creators(creator_emails)
         record_metadata["creators"] = [c.to_dict() for c in creators]
-        # TODO contributors (how to map roles?)
 
         # In practice contributors are urls instead of the proper object
         # https://github.com/ResearchObject/ro-crate/blob/c4b4e3e0936c95406e4adc82bcb7b1025c05a786/docs/profiles.md?plain=1#L193
@@ -104,29 +122,12 @@ class ROCrateDataCiteConverter:
             for e in self.crate.get_entities() if e.get('temporalCoverage')
         ]
 
-        def __url2identifier(url: str) -> dict:
-            scheme = detect_identifier_schemes(url)
-            if scheme:
-                scheme = scheme[0]
-                identifier = normalize_pid(url, scheme)
-            else:
-                scheme = 'other'
-                identifier = url
-            if scheme == 'url':
-                # unfortunately idutils (used by inveniordm) does not support w3id and geonames
-                parsed = urlparse(url)
-                if parsed.hostname.endswith('w3id.org'):
-                    scheme = 'w3id'
-                    identifier = parsed.path[1:]
-                if parsed.hostname.endswith('geonames.org'):
-                    scheme = 'geonames'
-                    identifier = parsed.path[1:]
-            return {'identifier': identifier, 'scheme': scheme}
+
 
         # https://www.researchobject.org/ro-crate/1.1/metadata.html#recommended-identifiers
         # https://inveniordm.docs.cern.ch/reference/metadata/#alternate-identifiers-0-n
         record_metadata['identifiers'] = [
-            __url2identifier(e.get('identifier'))
+            _url2identifier(e.get('identifier')).to_dict()
             for e in self.crate.get_entities() if e.get('identifier') and e.get('@id') == './'
         ]
 
