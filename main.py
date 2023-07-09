@@ -10,9 +10,8 @@ config.read(file_path.parent / "config.ini")
 config = {s: dict(config.items(s)) for s in config.sections()}
 
 
-
 def main():
-    upload_dir = file_path / "../test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800/"
+    upload_dir = file_path / "test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800/"
     rocrate_metadata_path = upload_dir / "ro-crate-metadata.json"
     client = InvenioRDMClient(base_url=config["api"]["base_url"], token=config["api"]["bearer_token"])
     converter = ROCrateDataCiteConverter(rocrate_metadata_path,
