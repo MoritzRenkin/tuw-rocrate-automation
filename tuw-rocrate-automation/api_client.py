@@ -3,23 +3,21 @@ import json
 import logging
 from pathlib import Path
 
+
 logger = logging.getLogger("ApiClient")
 file_path = Path(__file__).parent.resolve()
-token_file_path = file_path / "api-access-token.txt"
-
 
 class APIResponseException(Exception):
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
+    pass
 
 
 class InvenioRDMClient:
-    base_url = "https://test.researchdata.tuwien.ac.at/api/"
+    def __init__(self, base_url: str, token: str):
+        self.base_url = base_url
 
-    def __init__(self):
-        with open(token_file_path, "r") as token_file:
-            self.__token: str = token_file.read()
-            self.__token_suffix: str = f"?access_token={self.__token}"
+        self.__token: str = token
+        self.__token_suffix: str = f"?access_token={self.__token}"
+
 
     def _build_url(self, rel_path:str) -> str:
         return self.base_url + rel_path.strip("/") + self.__token_suffix

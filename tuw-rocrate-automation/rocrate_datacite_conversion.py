@@ -6,45 +6,27 @@ from idutils import detect_identifier_schemes, normalize_pid
 from urllib.parse import urlparse
 
 
-TEMPLATE_DATACITE_RECORD = {
-    "access": {
-        "record": "public",
-        "files": "public"
-    },
-    "files": {
-        "enabled": True # TODO
-    },
-    "metadata": {
-        "resource_type": {"id": "text"}, # TODO read from config
-        "publisher": "TEST" # TODO read from config
-    }
-}
-
-
-def _url2identifier(url: str) -> Identifier:
-    scheme = detect_identifier_schemes(url)
-    if scheme:
-        scheme = scheme[0]
-        identifier = normalize_pid(url, scheme)
-    else:
-        scheme = 'other'
-        identifier = url
-    if scheme == 'url':
-        # unfortunately idutils (used by inveniordm) does not support w3id and geonames
-        parsed = urlparse(url)
-        if parsed.hostname.endswith('w3id.org'):
-            scheme = 'w3id'
-            identifier = parsed.path[1:]
-        if parsed.hostname.endswith('geonames.org'):
-            scheme = 'geonames'
-            identifier = parsed.path[1:]
-    return Identifier(identifier=identifier, scheme=scheme)
-
+file_path = Path(__file__).parent.resolve()
 
 class ROCrateDataCiteConverter:
-    def __init__(self):
-        self.crate_metadata_raw: dict = {}
-        self.crate: ROCrate | None = None
+
+    supported_creator_identifiers = {"orcid", "gnd", "isni", "ror"}
+
+    def __init__(self, rocrate_metadata_path: str | Path, access_defaults: dict, metadata_defaults: dict):
+        rocrate_metadata_path = Path(rocrate_metadata_path)
+        with rocrate_metadata_path.open(mode="r") as file:
+            self.crate_metadata_raw = json.load(file)
+        self.crate = ROCrate(rocrate_metadata_path.parent)
+
+        self.file_paths = self._get_rocrate_file_paths()
+
+        self.TEMPLATE_DATACITE_RECORD = {
+            "access": access_defaults,
+            "metadata": {
+                "resource_type": {"id": metadata_defaults["resource_type"]},
+                "publisher": metadata_defaults["publisher"]
+            }
+        }
 
     def _get_creators(self, creator_emails) -> list[Agent]:
         """
@@ -59,8 +41,9 @@ class ROCrateDataCiteConverter:
         for agent in agents:
             if agent.get("email") in creator_emails:
                 agent_url = agent.get("@id") # @id field contains URL in crates from ROHub
-                identifiers = [_url2identifier(agent_url)]
-                person_or_org = PersonOrOrg(identifiers=None)
+                identifier = self._url2creator_identifier(agent_url)
+                identifiers = [identifier] if identifier else None
+                person_or_org = PersonOrOrg(identifiers=identifiers)
                 creators_by_id[agent_url] = Agent(person_or_org=person_or_org)
 
         for agent in agents:
@@ -76,17 +59,15 @@ class ROCrateDataCiteConverter:
 
         return list(creators_by_id.values())
 
-    def generate_datacite_record(self, rocrate_metadata_path: str | Path) -> dict:
+    def generate_datacite_record(self) -> dict:
         """
         TODO docu
         :return:
         """
-        rocrate_metadata_path = Path(rocrate_metadata_path)
-        with rocrate_metadata_path.open(mode="r") as file:
-            self.crate_metadata_raw = json.load(file)
-        self.crate = ROCrate(rocrate_metadata_path.parent)
+        record = self.TEMPLATE_DATACITE_RECORD.copy()
 
-        record = TEMPLATE_DATACITE_RECORD.copy()
+        record['files'] = {"enabled": (len(self.file_paths) != 0)}
+
         record_metadata: dict[str, type | list] = record['metadata']
         record_metadata['title'] = self.crate.name
         record_metadata['description'] = self.crate.description
@@ -125,12 +106,10 @@ class ROCrateDataCiteConverter:
             for e in self.crate.get_entities() if e.get('temporalCoverage')
         ]
 
-
-
         # https://www.researchobject.org/ro-crate/1.1/metadata.html#recommended-identifiers
         # https://inveniordm.docs.cern.ch/reference/metadata/#alternate-identifiers-0-n
         record_metadata['identifiers'] = [
-            _url2identifier(e.get('identifier')).to_dict()
+            self._url2identifier(e.get('identifier')).to_dict()
             for e in self.crate.get_entities() if e.get('identifier') and e.get('@id') == './'
         ]
 
@@ -151,20 +130,50 @@ class ROCrateDataCiteConverter:
         self.crate = None
         return record
 
-    def get_rocrate_file_paths(self, rocrate_metadata_path) -> list[Path]:
-        rocrate_metadata_path = Path(rocrate_metadata_path)
-        with rocrate_metadata_path.open(mode="r") as file:
-            self.crate_metadata_raw = json.load(file)
-        self.crate = ROCrate(rocrate_metadata_path.parent)
-
+    def _get_rocrate_file_paths(self) -> list[Path]:
         # external links contain '//' and will not be uploaded
         return [
-            e.get('name')
+            file_path / e.get('name')
             for e in self.crate.get_entities()
             if e.get('@type') and 'File' in e.get('@type') and '//' not in e.get('name')
         ]
 
+
+    @staticmethod
+    def _url2creator_identifier(url: str) -> Identifier | None:
+        """
+        Convert the url into a creator identifier object, if scheme is supported
+        :param url: Creator ID URL
+        :return: Identifier object if scheme is supported for creators, None else.
+        """
+        ident = ROCrateDataCiteConverter._url2identifier(url)
+        scheme = ident.scheme
+        if scheme in ROCrateDataCiteConverter.supported_creator_identifiers:
+            return ident
+        return None
+
+
+    @staticmethod
+    def _url2identifier(url: str) -> Identifier:
+        scheme = detect_identifier_schemes(url)
+        if scheme:
+            scheme = scheme[0]
+            identifier = normalize_pid(url, scheme)
+        else:
+            scheme = 'other'
+            identifier = url
+        if scheme == 'url':
+            # unfortunately idutils (used by inveniordm) does not support w3id and geonames
+            parsed = urlparse(url)
+            if parsed.hostname.endswith('w3id.org'):
+                scheme = 'w3id'
+                identifier = parsed.path[1:]
+            if parsed.hostname.endswith('geonames.org'):
+                scheme = 'geonames'
+                identifier = parsed.path[1:]
+        return Identifier(identifier=identifier, scheme=scheme)
+
 if __name__ == '__main__':
-    file_path = Path(__file__).parent.resolve()
+
     rocrate_path = file_path / '../test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800/ro-crate-metadata.json'
-    ROCrateDataCiteConverter().generate_datacite_record(rocrate_path)
+    ROCrateDataCiteConverter(rocrate_path).generate_datacite_record()
