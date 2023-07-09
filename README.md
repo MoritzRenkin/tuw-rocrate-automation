@@ -68,10 +68,9 @@ For other fields, certain assumptions had to be made:
 We use the RO-Crate from ./test/sample-rocrates/19f2cf29-c1c7-4abc-8443-354e7698bc86/ as a demonstrative upload.
 In this case, we directly publish the record using the `--publish` flag. In normal operation, it is advisable to publish manually using the Web Portal after checking the metadata and filling out potentially missing values.
 ```shell
-python tuw_rocrate_upload.py test/sample-rocrates/19f2cf29-c1c7-4abc-8443-354e7698bc86 --token your_token
-a8k6zCwHs --publish
+python tuw_rocrate_upload.py test/sample-rocrates/b97348a7-991f-46cf-9834-cf602bacf800 --token <your-token> --url https://test.researchdata.tuwien.ac.at/api/ --publish
 ```
-
+If you want to reproduce this test call, replace <your-token> with your personal API token.
 The published record is immediately visible in the research data portal, including the files referenced in the RO-Crate: https://test.researchdata.tuwien.ac.at/records/fqgr5-zs043.
 
 
